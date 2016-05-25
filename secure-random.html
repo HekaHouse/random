@@ -1,0 +1,99 @@
+<link rel="import" href="../polymer/polymer.html">
+<!--
+# secure-random
+
+`<secure-random>` A Polymer element for generating cryptographic random values.
+
+[API Docs and Demo](https://heka-house-polymer-demos.firebaseapp.com/secure-random)
+
+[Source](http://github.com/hekahouse/secure-random/)
+
+
+## Install
+
+    bower install --save HekaHouse/secure-random
+
+## Example
+
+    <secure-random
+      length="16"
+      random="{{random}}">
+    </secure-random>
+
+In the example {{random}} is a bound variable to recieve the random values.
+
+
+## Dependencies
+
+Element dependencies are managed via [Bower](http://bower.io/). You can
+install that via:
+
+    npm install -g bower
+
+Then, go ahead and download the element's dependencies:
+
+    bower install
+
+secure-random has no dependencies
+
+## Related
+
+@group HekaHouse
+@element secure-random
+@demo demo/index.html
+-->
+
+<dom-module id="secure-random">
+  <template>
+  <style>
+    :host {
+      display: block;
+    }
+  </style>
+
+
+  </template>
+</dom-module>
+<script>
+
+  Polymer({
+    is: 'secure-random',
+    properties: {
+      random: {
+        type: Array,
+        notify: true
+      },
+      randomStr: {
+        type: String,
+        notify: true
+      },
+      length: {
+        type: Number,
+        notify: true,
+        value: 16,
+        observer: '_generate'
+      }
+    },
+    _generate: function(length) {
+      if (window.crypto && window.crypto.getRandomValues) {
+        // Modern browsers
+        var arr = new Uint8Array(length);
+        window.crypto.getRandomValues(arr);
+        this.random = arr;
+      } else if (window.msCrypto && window.msCrypto.getRandomValues) {
+        // IE
+        var arr = new Uint8Array(length);
+        window.msCrypto.getRandomValues(arr);
+        this.random = arr;
+      } else {
+        // Old junk
+        throw new Error('Not implemented yet');
+      }
+      var str = "";
+      for (var num=0; num < length; ++num) {
+        str += this.random[num] + " ";
+      }
+      this.randomStr = str;
+    }
+  });
+</script>

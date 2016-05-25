@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>secure-random demo</title>
+    <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="../secure-random.html">
+    <link rel="import" href="../../paper-input/paper-input.html">
+    <link rel="manifest" href="manifest.json">
+    <style is="custom-style" include="demo-pages-shared-styles">
+      app-header span {
+        margin: 16px;
+      }
+      div.content {
+        margin: 16px;
+      }
+    </style>
+  </head>
+  <body unresolved>
+    <template id="bound" is="dom-bind">
+      <app-header condenses fixed effects="resize-title blend-background waterfall">
+        <span>A polymer element for generating random sequences for use in cryptography.</span>
+      </app-header>
+      <div class="content">
+        <paper-input label="Sequence Length" value="{{length}}"></paper-input>
+        <secure-random
+          length="{{length}}"
+          random-str="{{random}}">
+        </secure-random>
+        <paper-input label="Random Sequence" value="{{random}}"></paper-input>
+      </div>
+  </template>
+  <script>
+
+  </script>
+</body>
