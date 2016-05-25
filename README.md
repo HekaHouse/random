@@ -39,3 +39,5 @@ Then, go ahead and download the element's dependencies:
 secure-random depends only on firebase-element from Google
 
 ## Related
+
+[secure-hash](http://github.com/hekahouse/secure-hash/)
